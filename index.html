@@ -1,1 +1,560 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>| TKAF | Botu — Moderasyon &amp; TKAF Star</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --surface-soft: #eef1f7;
+      --text: #111318;
+      --muted: #5c6475;
+      --line: #e4e8f0;
+      --brand: #5865f2;
+      --star: #d91b42;
+      --dark-btn: #181a20;
+    }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      padding-bottom: 48px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    .topbar {
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: -0.2px;
+    }
+
+    .logo-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ff7a59, #5865f2);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 0.85rem;
+      font-weight: 900;
+    }
+
+    .menu-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 13px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+
+    .mobile-drawer {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px 18px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer a {
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .mobile-drawer a:hover { background: var(--surface-soft); color: var(--text); }
+
+    .hero {
+      text-align: center;
+      padding: 36px 0 24px;
+    }
+
+    .hero-visual {
+      width: 240px;
+      height: 240px;
+      margin: 0 auto 20px;
+      border-radius: 28px;
+      background: linear-gradient(160deg, #1b2236, #2d3756);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 18px 40px rgba(17, 19, 24, 0.14);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-visual::after {
+      content: "TKAF";
+      position: absolute;
+      font-size: 5.2rem;
+      font-weight: 900;
+      opacity: 0.12;
+      letter-spacing: 4px;
+    }
+
+    .hero-kicker {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 5vw, 2.7rem);
+      line-height: 1.15;
+      font-weight: 850;
+      letter-spacing: -0.6px;
+      margin-bottom: 12px;
+    }
+
+    .hero-sub {
+      max-width: 540px;
+      margin: 0 auto 22px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-dark {
+      background: var(--dark-btn);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 18px;
+      font-weight: 600;
+      font-size: 0.94rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-light {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 11px 18px;
+      font-weight: 600;
+      font-size: 0.94rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .duration-bar-wrap {
+      margin: 26px auto 18px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .duration-tabs {
+      display: inline-grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--surface-soft);
+      padding: 5px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      width: min(420px, 100%);
+    }
+
+    .tab-btn {
+      border: none;
+      background: transparent;
+      padding: 9px 14px;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: 0.18s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 2px 8px rgba(17, 19, 24, 0.08);
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 460px);
+      justify-content: center;
+      gap: 18px;
+      margin-top: 8px;
+    }
+
+    .plan-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 10px 28px rgba(17, 19, 24, 0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .plan-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 13px;
+      background: var(--star);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 1.35rem;
+      margin-bottom: 16px;
+    }
+
+    .plan-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .plan-desc {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 18px;
+    }
+
+    .plan-price-box {
+      padding: 14px 0 18px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .plan-price {
+      font-size: 1.85rem;
+      font-weight: 850;
+      letter-spacing: -0.5px;
+    }
+
+    .plan-period {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .check-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.94rem;
+      color: var(--text);
+    }
+
+    .tick {
+      color: var(--text);
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .pay-btn {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 13px 16px;
+      background: #6b6e75;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.96rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: 0.18s ease;
+    }
+
+    .pay-btn:hover { background: var(--dark-btn); }
+
+    .section-box {
+      margin-top: 34px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .section-box h2 {
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+
+    .section-box p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      margin-bottom: 16px;
+    }
+
+    .cmds {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+    }
+
+    .cmd {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .cmd code {
+      display: block;
+      font-weight: 700;
+      color: var(--brand);
+      margin-bottom: 3px;
+    }
+
+    .cmd span {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 19, 24, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 50;
+    }
+    .backdrop.open { display: flex; }
+
+    .modal {
+      width: min(430px, 100%);
+      background: var(--surface);
+      border-radius: 18px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 50px rgba(17, 19, 24, 0.22);
+    }
+
+    .modal h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .modal p { font-size: 0.92rem; color: var(--muted); margin-bottom: 14px; }
+
+    .summary {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      font-size: 0.92rem;
+      display: grid;
+      gap: 6px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <a href="#" class="logo">
+        <span class="logo-badge">TK</span>
+        <span>| TKAF | Botu</span>
+      </a>
+      <button type="button" class="menu-btn" onclick="toggleMenu()">Menü ☰</button>
+    </div>
+    <nav id="mobileDrawer" class="mobile-drawer">
+      <a href="#premium" onclick="toggleMenu()">TKAF Star</a>
+      <a href="#komutlar" onclick="toggleMenu()">Komutlar</a>
+      <a href="#hakkimizda" onclick="toggleMenu()">Hakkımızda</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section id="hakkimizda" class="hero">
+      <div class="hero-visual">
+        <div style="font-size:1.35rem;font-weight:900;z-index:1;">| TKAF | BOTU</div>
+        <div style="font-size:0.82rem;opacity:0.8;z-index:1;margin-top:4px;">Moderasyon &amp; Destek</div>
+      </div>
+      <div class="hero-kicker">Sunucu Yönetiminin Yeni Standardı</div>
+      <h1>Favori sunucunun<br />favori botu.</h1>
+      <p class="hero-sub">
+        Otomatik filtre, 3 kademeli uyarı ve tam yasaklama sistemi, karaliste ve
+        destek biletleriyle sunucunu düzenli tut.
+      </p>
+      <div class="hero-cta-row">
+        <a href="#premium" class="btn-dark">TKAF Star (Ücretsiz) ↗</a>
+        <a href="#komutlar" class="btn-light">Komutları Gör</a>
+      </div>
+    </section>
+
+    <section id="premium">
+      <div class="duration-bar-wrap">
+        <div class="duration-tabs" role="tablist">
+          <button type="button" class="tab-btn active" data-months="1" onclick="selectDuration(1, this)">1 Ay</button>
+          <button type="button" class="tab-btn" data-months="3" onclick="selectDuration(3, this)">3 Ay</button>
+          <button type="button" class="tab-btn" data-months="6" onclick="selectDuration(6, this)">6 Ay</button>
+        </div>
+      </div>
+
+      <div class="plans-grid">
+        <article class="plan-card">
+          <div class="plan-icon">★</div>
+          <div class="plan-title">TKAF Star</div>
+          <p class="plan-desc">Topluluğun bir parçası olduğunu göster (Şuanlık Ücretsiz).</p>
+          <div class="plan-price-box">
+            <span id="starPrice" class="plan-price">Ücretsiz</span>
+            <span id="starPeriod" class="plan-period">/ 1 Ay</span>
+          </div>
+          <ul class="check-list">
+            <li><span class="tick">✓</span> <span>Özel renkli destekçi rolü ve öncelikli rozet</span></li>
+            <li><span class="tick">✓</span> <span>3 kademeli uyarı ve otomatik tam yasaklama</span></li>
+            <li><span class="tick">✓</span> <span>Karaliste ve /kullanıcı-bilgi Ban Bilgi paneli</span></li>
+            <li><span class="tick">✓</span> <span>4 kategorili destek bileti sistemi</span></li>
+            <li><span class="tick">✓</span> <span>Sitede destekçi olarak görünme</span></li>
+          </ul>
+          <button type="button" class="pay-btn" onclick="openCheckout('TKAF Star')">Ücretsiz Al ↗</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="komutlar" class="section-box">
+      <h2>Aktif Komutlar</h2>
+      <p>Sunucu içi yönetim ve sorgulama komutları.</p>
+      <div class="cmds">
+        <div class="cmd"><code>/uyarı-ver</code><span>Kullanıcıya uyarı verir ve ceza uygular.</span></div>
+        <div class="cmd"><code>/son-uyarı</code><span>Son uyarıyı verir ve tam yasaklar.</span></div>
+        <div class="cmd"><code>/tam-yasakla</code><span>Bağlı sunuculardan tam yasak atar.</span></div>
+        <div class="cmd"><code>/karaliste ekle</code><span>Kullanıcıyı karalisteye alır.</span></div>
+        <div class="cmd"><code>/kullanıcı-bilgi</code><span>Kullanıcı ve Ban Bilgi butonunu açar.</span></div>
+        <div class="cmd"><code>/destek-kur</code><span>Destek bileti menüsünü gönderir.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="checkoutModal" class="backdrop" onclick="backdropClose(event)">
+    <div class="modal">
+      <h3>TKAF Star — Ücretsiz</h3>
+      <p>Seçtiğin süre için talep metnini kopyalayıp destek biletinden iletebilirsin.</p>
+      <div class="summary">
+        <div><strong>Paket:</strong> <span id="mPlan">-</span></div>
+        <div><strong>Süre:</strong> <span id="mDuration">-</span></div>
+        <div><strong>Tutar:</strong> <span id="mPrice">Ücretsiz</span></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-light" onclick="closeCheckout()">Kapat</button>
+        <button type="button" class="btn-dark" onclick="copyOrder()">Talep Metnini Kopyala</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const DURATIONS = {
+      1: "1 Ay",
+      3: "3 Ay",
+      6: "6 Ay"
+    };
+
+    let selectedMonths = 1;
+
+    function toggleMenu() {
+      document.getElementById("mobileDrawer").classList.toggle("open");
+    }
+
+    function selectDuration(months, btnEl) {
+      selectedMonths = months;
+      document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+      btnEl.classList.add("active");
+
+      const label = DURATIONS[months];
+      document.getElementById("starPrice").textContent = "Ücretsiz";
+      document.getElementById("starPeriod").textContent = `/ ${label}`;
+    }
+
+    function openCheckout(planName) {
+      const label = DURATIONS[selectedMonths];
+      document.getElementById("mPlan").textContent = planName;
+      document.getElementById("mDuration").textContent = label;
+      document.getElementById("mPrice").textContent = "Ücretsiz";
+      document.getElementById("checkoutModal").dataset.orderText =
+        `Merhaba, | TKAF | Botu için ${planName} (${label} - Ücretsiz) paketini almak istiyorum. Sunucu ID: [SUNUCU_ID]`;
+      document.getElementById("checkoutModal").classList.add("open");
+    }
+
+    function closeCheckout() {
+      document.getElementById("checkoutModal").classList.remove("open");
+    }
+
+    function backdropClose(e) {
+      if (e.target.id === "checkoutModal") closeCheckout();
+    }
+
+    function copyOrder() {
+      const text = document.getElementById("checkoutModal").dataset.orderText || "";
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Talep metni kopyalandı!");
+      });
+    }
+  </script>
+</body>
+</html>
