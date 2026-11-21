@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TKAF Star Plus — Özel Rol Oluşturucu</title>
+  <title>TTAF Star & TTAF Plus</title>
   <style>
     :root {
       --bg: #0f1219;
@@ -57,7 +57,44 @@
     .subtitle {
       color: var(--muted);
       font-size: 15px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 6px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #ffffff;
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
     }
 
     .card {
@@ -168,7 +205,7 @@
       flex-wrap: wrap;
     }
 
-    button {
+    .action-btn {
       border: none;
       border-radius: 10px;
       padding: 11px 16px;
@@ -178,7 +215,7 @@
       transition: transform 0.12s ease, opacity 0.15s ease;
     }
 
-    button:active {
+    .action-btn:active {
       transform: scale(0.98);
     }
 
@@ -227,69 +264,107 @@
 </head>
 <body>
   <div class="container">
-    <div class="badge">TKAF STAR PLUS</div>
-    <h1>Kendine Özel Rol Oluşturucu</h1>
+    <div class="badge">TTAF STAR &amp; TTAF PLUS</div>
+    <h1>TTAF Paketleri ve Özel Rol</h1>
     <p class="subtitle">
-      TKAF Star Plus ile rol adını ve rengini belirle, komutunu saniyeler içinde oluşturup kopyala.
+      Sekmelerden TTAF Star veya TTAF Plus paketini seçerek yetkileri incele ve özel rol oluştur.
     </p>
 
-    <div class="card">
-      <h2>Özel Rol Tasarla</h2>
-      <div class="grid">
-        <div>
-          <label for="roleName">Rol Adı</label>
-          <input
-            id="roleName"
-            type="text"
-            maxlength="32"
-            value="Star Komutan"
-            placeholder="Örn: Star Komutan"
-          />
-        </div>
-        <div>
-          <label for="roleColor">Rol Rengi</label>
-          <input id="roleColor" type="color" value="#7c5cff" />
-        </div>
-      </div>
-
-      <div class="preview-box">
-        <span style="color: var(--muted); font-size: 13px;">Canlı Önizleme:</span>
-        <span class="role-pill" id="previewPill">
-          <span class="role-dot" id="previewDot" style="background: #7c5cff;"></span>
-          <span id="previewText">Star Komutan</span>
-        </span>
-      </div>
-
-      <label for="cmdOutput">Oluşturulan Komut</label>
-      <div class="cmd-box" id="cmdOutput">/ozel-rol ad:Star Komutan renk:#7C5CFF</div>
-
-      <div class="btn-row">
-        <button class="btn-primary" id="copyBtn" type="button">Komutu Kopyala</button>
-        <button class="btn-secondary" id="randomBtn" type="button">Rastgele Renk</button>
-      </div>
-      <div class="status" id="statusMsg"></div>
+    <div class="tabs">
+      <button class="tab-btn active" id="tabStar" type="button">TTAF Star</button>
+      <button class="tab-btn" id="tabPlus" type="button">TTAF Plus</button>
     </div>
 
-    <div class="card">
-      <h2>TKAF Star Plus Avantajları</h2>
-      <div class="features">
-        <div class="feature-item">
-          <strong>Özel Rol Açma</strong>
-          <span>Kendi rol adını ve hex rengini anında ayarla.</span>
+    <div class="panel active" id="panelStar">
+      <div class="card">
+        <h2>TTAF Star Yetkileri</h2>
+        <div class="features">
+          <div class="feature-item">
+            <strong>Resim &amp; GIF Gönderme</strong>
+            <span>Düz resim ve hareketli GIF gönderebilirsin.</span>
+          </div>
+          <div class="feature-item">
+            <strong>Destekçi Rozeti</strong>
+            <span>Sunucuda destekçi olarak öne çıkarsın.</span>
+          </div>
         </div>
-        <div class="feature-item">
-          <strong>Özel İkon & Renk Güncelleme</strong>
-          <span>Rolünü dilediğin zaman tek komutla güncelle.</span>
+      </div>
+    </div>
+
+    <div class="panel" id="panelPlus">
+      <div class="card">
+        <h2>Özel Rol Oluşturucu</h2>
+        <div class="grid">
+          <div>
+            <label for="roleName">Rol Adı</label>
+            <input
+              id="roleName"
+              type="text"
+              maxlength="32"
+              value="Star Komutan"
+              placeholder="Örn: Star Komutan"
+            />
+          </div>
+          <div>
+            <label for="roleColor">Rol Rengi</label>
+            <input id="roleColor" type="color" value="#7c5cff" />
+          </div>
         </div>
-        <div class="feature-item">
-          <strong>Ücretsiz Pakete Ek Güç</strong>
-          <span>TKAF Star Ücretsiz komutlarına ek özel yetkiler.</span>
+
+        <div class="preview-box">
+          <span style="color: var(--muted); font-size: 13px;">Canlı Önizleme:</span>
+          <span class="role-pill" id="previewPill">
+            <span class="role-dot" id="previewDot" style="background: #7c5cff;"></span>
+            <span id="previewText">Star Komutan</span>
+          </span>
+        </div>
+
+        <label for="cmdOutput">Oluşturulan Komut</label>
+        <div class="cmd-box" id="cmdOutput">/ozel-rol ad:Star Komutan renk:#7C5CFF</div>
+
+        <div class="btn-row">
+          <button class="action-btn btn-primary" id="copyBtn" type="button">Komutu Kopyala</button>
+          <button class="action-btn btn-secondary" id="randomBtn" type="button">Rastgele Renk</button>
+        </div>
+        <div class="status" id="statusMsg"></div>
+      </div>
+
+      <div class="card">
+        <h2>TTAF Plus Yetkileri</h2>
+        <div class="features">
+          <div class="feature-item">
+            <strong>Özel Rol Oluşturma</strong>
+            <span>Kendi rol adını ve hex rengini belirleyip özel rol oluşturabilirsin.</span>
+          </div>
+          <div class="feature-item">
+            <strong>TTAF Star ile Aynı Yetkiler</strong>
+            <span>Resim ve GIF gönderme ile destekçi avantajlarının tamamı TTAF Plus'ta da geçerlidir.</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
+    const tabStar = document.getElementById("tabStar");
+    const tabPlus = document.getElementById("tabPlus");
+    const panelStar = document.getElementById("panelStar");
+    const panelPlus = document.getElementById("panelPlus");
+
+    tabStar.addEventListener("click", () => {
+      tabStar.classList.add("active");
+      tabPlus.classList.remove("active");
+      panelStar.classList.add("active");
+      panelPlus.classList.remove("active");
+    });
+
+    tabPlus.addEventListener("click", () => {
+      tabPlus.classList.add("active");
+      tabStar.classList.remove("active");
+      panelPlus.classList.add("active");
+      panelStar.classList.remove("active");
+    });
+
     const roleNameInput = document.getElementById("roleName");
     const roleColorInput = document.getElementById("roleColor");
     const previewText = document.getElementById("previewText");
