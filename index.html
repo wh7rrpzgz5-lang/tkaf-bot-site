@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TKAF — Star & Star Plus Paketleri</title>
+  <title>TKAF Star & TKAF Star Plus</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -283,23 +283,67 @@
       padding: 13px 16px;
       border-radius: 11px;
       border: none;
-      background: #5b606b;
+      background: var(--primary);
       color: #ffffff;
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.15s ease;
+      transition: opacity 0.15s ease;
     }
 
-    .cta-btn.ready {
-      background: var(--primary);
+    .cta-btn:active {
+      opacity: 0.9;
     }
 
-    .cta-note {
-      margin-top: 10px;
+    /* Kod Oluşturma Kutusu */
+    .code-box {
+      margin-top: 14px;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: none;
+    }
+
+    .code-box.active {
+      display: block;
+    }
+
+    .code-line {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 13px;
-      color: var(--muted);
-      min-height: 18px;
+      color: var(--text);
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      word-break: break-all;
+    }
+
+    .code-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .copy-mini-btn {
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .copy-status {
+      font-size: 13px;
+      font-weight: 600;
+      color: #15803d;
     }
 
     /* SSS Bölümü */
@@ -452,59 +496,71 @@
       </div>
 
       <div class="plans-grid">
-        <!-- Star Kartı -->
+        <!-- TKAF Star Kartı -->
         <article class="plan-card">
           <div>
             <div class="plan-top">
               <div class="plan-icon" aria-hidden="true">&#9733;</div>
-              <span class="pill-tag">Destekçi Paketi</span>
+              <span class="pill-tag">Şuanlık Bedava</span>
             </div>
-            <h2 class="plan-name">Star</h2>
-            <p class="plan-desc">Destekçi avantajları ve sohbet ayrıcalıklarıyla toplulukta öne çık.</p>
+            <h2 class="plan-name">TKAF Star</h2>
+            <p class="plan-desc">Düz resim, GIF gönderebilir ve destekçi avantajlarıyla toplulukta yer al.</p>
 
             <div class="price-box">
-              <span class="price-val" id="starPrice">&#8378;189,99</span>
+              <span class="price-val">Bedava</span>
               <span class="price-sub" id="starPeriod">/ 1 Ay</span>
             </div>
 
             <ul class="perk-list">
               <li><span class="check">&#10003;</span><span>Düz resim ve GIF gönderebilir</span></li>
               <li><span class="check">&#10003;</span><span>Destekçi avantajı ve rolü</span></li>
-              <li><span class="check">&#10003;</span><span>Sohbet kanalında medya ve emoji kullanımı</span></li>
+              <li><span class="check">&#10003;</span><span>Anında kod alma ve kullanma</span></li>
             </ul>
           </div>
 
           <div>
-            <button class="cta-btn ready" type="button" data-plan="Star">Paket Detayı</button>
-            <div class="cta-note" id="starNote"></div>
+            <button class="cta-btn" type="button" data-plan="TKAF Star" data-target="starCodeBox">Kod Al</button>
+            <div class="code-box" id="starCodeBox">
+              <div class="code-line" id="starCodeText">TKAF-STAR-1M-FREE</div>
+              <div class="code-actions">
+                <button class="copy-mini-btn" type="button" data-copy="starCodeText" data-status="starCopyStatus">Kodu Kopyala</button>
+                <span class="copy-status" id="starCopyStatus"></span>
+              </div>
+            </div>
           </div>
         </article>
 
-        <!-- Star Plus Kartı -->
+        <!-- TKAF Star Plus Kartı -->
         <article class="plan-card">
           <div>
             <div class="plan-top">
               <div class="plan-icon plus" aria-hidden="true">&#10024;</div>
-              <span class="pill-tag">Daha Fazla Ayrıcalık</span>
+              <span class="pill-tag">Şuanlık Bedava</span>
             </div>
-            <h2 class="plan-name">Star Plus</h2>
-            <p class="plan-desc">Star ile aynı yetkilerin tamamı, sana özel rol oluşturma hakkıyla birlikte.</p>
+            <h2 class="plan-name">TKAF Star Plus</h2>
+            <p class="plan-desc">Kendine özel rol oluşturabilme hakkı ve TKAF Star ile aynı yetkiler.</p>
 
             <div class="price-box">
-              <span class="price-val" id="plusPrice">&#8378;329,99</span>
+              <span class="price-val">Bedava</span>
               <span class="price-sub" id="plusPeriod">/ 1 Ay</span>
             </div>
 
             <ul class="perk-list">
-              <li><span class="check">&#10003;</span><span>Star ile aynı yetkilerin tamamı (resim, GIF ve destekçi)</span></li>
               <li><span class="check">&#10003;</span><span>Kendine özel rol oluşturabilme</span></li>
-              <li><span class="check">&#10003;</span><span>Özel rolünü iki arkadaşınla paylaşma</span></li>
+              <li><span class="check">&#10003;</span><span>TKAF Star ile aynı yetkiler (resim, GIF ve destekçi)</span></li>
+              <li><span class="check">&#10003;</span><span>Anında kod alma ve kullanma</span></li>
             </ul>
           </div>
 
           <div>
-            <button class="cta-btn" type="button" data-plan="Star Plus">Ödemeye Geç &#8599;</button>
-            <div class="cta-note" id="plusNote"></div>
+            <button class="cta-btn" type="button" data-plan="TKAF Star Plus" data-target="plusCodeBox">Kod Al</button>
+            <div class="code-box" id="plusCodeBox">
+              <div class="code-line" id="plusCodeText">TKAF-PLUS-1M-FREE</div>
+              <div class="code-actions">
+                <button class="copy-mini-btn" type="button" data-copy="plusCodeText" data-status="plusCopyStatus">Kodu Kopyala</button>
+                <span class="copy-status" id="plusCopyStatus"></span>
+              </div>
+            </div>
           </div>
         </article>
       </div>
@@ -516,81 +572,41 @@
 
       <div class="faq-item open">
         <button class="faq-q" type="button">
-          <span>Star ile Star Plus arasındaki fark nedir?</span>
+          <span>TKAF Star ile TKAF Star Plus arasındaki fark nedir?</span>
           <span class="faq-sign">&times;</span>
         </button>
         <div class="faq-a">
-          Star; düz resim ve GIF gönderebilme ile destekçi avantajlarını sağlar. Star Plus ise Star ile aynı yetkilerin tamamına ek olarak kendine özel rol oluşturma ve bu rolü iki arkadaşınla paylaşma hakkı sunar.
+          TKAF Star düz resim ve GIF gönderebilme ile destekçi avantajı sağlar. TKAF Star Plus ise kendine özel rol oluşturabilme imkanı sunar ve TKAF Star ile aynı yetkilerin tamamına sahiptir.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" type="button">
-          <span>Hangi süre ve ödeme seçenekleri var?</span>
+          <span>Paketler şu an ücretli mi?</span>
           <span class="faq-sign">+</span>
         </button>
         <div class="faq-a">
-          Her iki paket için 1, 3 ve 6 aylık süre seçenekleri bulunur. Abonelik veya tek seferlik ödeme tercihine göre seçilen süre üzerinden işlem yapılır.
+          Hayır, seçilen süre boyunca TKAF Star ve TKAF Star Plus paketleri şu anlık bedavadır ve doğrudan kod alabilirsin.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" type="button">
-          <span>Avantajlar hangi sunucularda kullanılır?</span>
+          <span>Aldığım kodu nasıl kullanırım?</span>
           <span class="faq-sign">+</span>
         </button>
         <div class="faq-a">
-          Seçilen sunucuda aktif olarak kullanılır. Sohbet, destekçi ve özel rol ayrıcalıkları tanımlanan sunucuda geçerlidir.
+          "Kod Al" butonuna bastığında seçtiğin süreye göre oluşturulan kodu kopyalayıp ilgili alanda kullanabilirsin.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" type="button">
-          <span>Paket süresi ne zaman başlar?</span>
+          <span>Hangi süre seçenekleri var?</span>
           <span class="faq-sign">+</span>
         </button>
         <div class="faq-a">
-          Paket tanımlandığında süre aktif hale gelir ve seçilen ay boyunca devam eder.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" type="button">
-          <span>Hediye kodunun son kullanma tarihi var mı?</span>
-          <span class="faq-sign">+</span>
-        </button>
-        <div class="faq-a">
-          Kullanılmamış hediye kodları süresizdir ve başka bir kullanıcıya hediye edilebilir.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" type="button">
-          <span>Aktif paketim varken hediye kodu kullanırsam ne olur?</span>
-          <span class="faq-sign">+</span>
-        </button>
-        <div class="faq-a">
-          Yeni koddan gelen süre mevcut paket süren tamamlandıktan sonra devreye girer.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" type="button">
-          <span>Aboneliğimi nasıl iptal ederim?</span>
-          <span class="faq-sign">+</span>
-        </button>
-        <div class="faq-a">
-          Abonelik iptali sonraki yenilemeyi durdurur; mevcut ödenmiş dönemdeki avantajların dönem sonuna kadar devam eder.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" type="button">
-          <span>Avantajlarımı diğer sunucuya taşıyabilir miyim?</span>
-          <span class="faq-sign">+</span>
-        </button>
-        <div class="faq-a">
-          Sunucu değişikliği yapıldığında abonelik rolü yeni sunucuya tanımlanır; özel rol ve kişisel ayarlar yeni sunucuda oluşturulur.
+          1 Ay, 3 Ay ve 6 Ay seçenekleri arasından istediğin süreyi seçip buna uygun kodu oluşturabilirsin.
         </div>
       </div>
     </section>
@@ -639,34 +655,27 @@
       });
     });
 
-    const priceTable = {
-      1: { star: "₺189,99", plus: "₺329,99" },
-      3: { star: "₺519,99", plus: "₺899,99" },
-      6: { star: "₺949,99", plus: "₺1.649,99" }
-    };
-
     let selectedMode = "Abonelik";
     let selectedMonths = "1";
 
-    const starPriceEl = document.getElementById("starPrice");
-    const plusPriceEl = document.getElementById("plusPrice");
     const starPeriodEl = document.getElementById("starPeriod");
     const plusPeriodEl = document.getElementById("plusPeriod");
-    const starNoteEl = document.getElementById("starNote");
-    const plusNoteEl = document.getElementById("plusNote");
+    const starCodeText = document.getElementById("starCodeText");
+    const plusCodeText = document.getElementById("plusCodeText");
 
-    function updatePrices() {
-      const p = priceTable[selectedMonths];
-      starPriceEl.textContent = p.star;
-      plusPriceEl.textContent = p.plus;
+    function randomToken(len = 6) {
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      let out = "";
+      for (let i = 0; i < len; i++) {
+        out += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return out;
+    }
 
-      const label =
-        selectedMode === "Abonelik"
-          ? `/ ${selectedMonths} Ay`
-          : `/ ${selectedMonths} Ay (Tek Seferlik)`;
-
-      starPeriodEl.textContent = label;
-      plusPeriodEl.textContent = label;
+    function updatePeriods() {
+      const suffix = selectedMode === "Abonelik" ? `/ ${selectedMonths} Ay` : `/ ${selectedMonths} Ay (Tek Seferlik)`;
+      starPeriodEl.textContent = suffix;
+      plusPeriodEl.textContent = suffix;
     }
 
     document.querySelectorAll("#billingGroup .seg-btn").forEach((btn) => {
@@ -674,7 +683,7 @@
         document.querySelectorAll("#billingGroup .seg-btn").forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         selectedMode = btn.dataset.mode;
-        updatePrices();
+        updatePeriods();
       });
     });
 
@@ -683,18 +692,47 @@
         document.querySelectorAll("#durationGroup .seg-btn").forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         selectedMonths = btn.dataset.months;
-        updatePrices();
+        updatePeriods();
       });
     });
 
     document.querySelectorAll(".cta-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         const plan = btn.dataset.plan;
-        const msg = `${plan} (${selectedMonths} Ay • ${selectedMode}) seçildi.`;
-        if (plan === "Star") {
-          starNoteEl.textContent = msg;
+        const targetId = btn.dataset.target;
+        const box = document.getElementById(targetId);
+        const prefix = plan === "TKAF Star Plus" ? "TKAF-PLUS" : "TKAF-STAR";
+        const newCode = `${prefix}-${selectedMonths}M-FREE-${randomToken(6)}`;
+
+        if (plan === "TKAF Star Plus") {
+          plusCodeText.textContent = newCode;
+          document.getElementById("plusCopyStatus").textContent = "";
         } else {
-          plusNoteEl.textContent = msg;
+          starCodeText.textContent = newCode;
+          document.getElementById("starCopyStatus").textContent = "";
+        }
+
+        box.classList.add("active");
+      });
+    });
+
+    document.querySelectorAll(".copy-mini-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const textEl = document.getElementById(btn.dataset.copy);
+        const statusEl = document.getElementById(btn.dataset.status);
+        const codeValue = textEl.textContent;
+
+        try {
+          await navigator.clipboard.writeText(codeValue);
+          statusEl.textContent = "Kopyalandı!";
+        } catch {
+          const temp = document.createElement("textarea");
+          temp.value = codeValue;
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand("copy");
+          document.body.removeChild(temp);
+          statusEl.textContent = "Kopyalandı!";
         }
       });
     });
@@ -707,7 +745,7 @@
       });
     });
 
-    updatePrices();
+    updatePeriods();
   </script>
 </body>
 </html>
